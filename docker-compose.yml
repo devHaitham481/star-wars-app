@@ -1,0 +1,12 @@
+version: "3"
+services:
+  nextjs-app:
+    build:
+      context: ./apps/web
+    ports:
+      - "3000:3000"
+  nestjs-app:
+    build:
+      context: ./apps/backend
+    ports:
+      - "3002:3002"
