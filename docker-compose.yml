@@ -1,12 +1,20 @@
-version: "3"
 services:
-  nextjs-app:
+  backend:
     build:
-      context: ./apps/web
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./backend:/app
+    command: pnpm run start:dev
+
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
     ports:
       - "3000:3000"
-  nestjs-app:
-    build:
-      context: ./apps/backend
-    ports:
-      - "3002:3002"
+    volumes:
+      - ./web:/app
+    command: pnpm run dev
