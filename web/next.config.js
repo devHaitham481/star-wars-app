@@ -9,4 +9,7 @@ module.exports = {
   images: {
     domains: ["download.logo.wine", "static-mh.content.disney.io"],
   },
+  experimental: {
+    missingSuspenseWithCSRBailout: false,
+  },
 };

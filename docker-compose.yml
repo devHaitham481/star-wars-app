@@ -8,6 +8,11 @@ services:
     volumes:
       - ./backend:/app
     command: pnpm run start:dev
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3001/"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   web:
     build:
@@ -15,6 +20,11 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     volumes:
       - ./web:/app
     command: pnpm run dev
+    depends_on:
+      backend:
+        condition: service_healthy
